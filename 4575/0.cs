@@ -19,7 +19,7 @@ namespace Application
         }
         public virtual double Area()
         {
-            double p = (a+b+c)/ 2.0;
+            double p = (a + b + c) / 2.0;
             double S = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
             return S;
         }
@@ -29,7 +29,7 @@ namespace Application
         }
         public virtual double Radius()
         {
-            double R = a*b*c / (4 * Area());
+            double R = a * b * c / (4 * Area());
             return R;
         }
     }
@@ -41,15 +41,15 @@ namespace Application
 
         public override double Area()
         {
-            double S = b / 2.0 * Math.Sqrt(a*a - b*b / 4.0);
+            double S = b / 2.0 * Math.Sqrt(a * a - b * b / 4.0);
             return S;
         }
 
     }
 
-    class EquilateralTriangle : Triangle
+    class EquilateralTriangle : IsoscelesTriangle
     {
-        public EquilateralTriangle(int a) : base(a, a, a)
+        public EquilateralTriangle(int a) : base(a, a)
         { }
 
         public override double Area()
@@ -71,9 +71,9 @@ namespace Application
 
         static public void Main()
         {
-            int N, a=0, b=0, c=0;
+            int N, a = 0, b = 0, c = 0;
             N = int.Parse(Console.ReadLine());
-            switch(N)
+            switch (N)
             {
                 case 1:
                     a = int.Parse(Console.ReadLine());
