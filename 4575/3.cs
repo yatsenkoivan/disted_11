@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Application
 {
@@ -46,7 +43,7 @@ namespace Application
         }
         public override double BaseArea()
         {
-            double p = (a+b+c) / 2.0;
+            double p = (a + b + c) / 2.0;
             double S_base = Math.Sqrt(p * (p - a) * (p - b) * (p - c));
             return S_base;
         }
@@ -77,12 +74,11 @@ namespace Application
 
     class Program
     {
-
         static public void Main()
         {
             int N;
             int a = 0, b = 0, c = 0, h = 0;
-            int alpha=0;
+            int alpha = 0;
             N = int.Parse(Console.ReadLine());
             switch (N)
             {

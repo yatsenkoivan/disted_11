@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Application
 {
@@ -25,7 +22,7 @@ namespace Application
         }
         public virtual double Radius1()
         {
-            double R = a*b*c / (4 * Area());
+            double R = a * b * c / (4 * Area());
             return R;
         }
         public virtual double Radius2()
@@ -76,9 +73,9 @@ namespace Application
 
         static public void Main()
         {
-            int N, a=0, b=0, c=0;
+            int N, a = 0, b = 0, c = 0;
             N = int.Parse(Console.ReadLine());
-            switch(N)
+            switch (N)
             {
                 case 1:
                 case 2:

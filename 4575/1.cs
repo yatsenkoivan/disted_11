@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Application
 {
-
     class Parallelogram
     {
         protected int d1;
@@ -25,7 +21,7 @@ namespace Application
         }
         public virtual double Side()
         {
-            double a = Math.Sqrt(Math.Pow(d1, 2)/4.0 + Math.Pow(d2, 2)/4.0 - d1*d2/2.0 * Math.Cos(alpha_rad));
+            double a = Math.Sqrt(Math.Pow(d1, 2) / 4.0 + Math.Pow(d2, 2) / 4.0 - d1 * d2 / 2.0 * Math.Cos(alpha_rad));
             return a;
         }
         public virtual double Height()
@@ -38,7 +34,7 @@ namespace Application
     class Diamond : Parallelogram
     {
         public Diamond(int d1, int d2) : base(d1, d2, 90)
-        {}
+        { }
         public override double Area()
         {
             double S = d1 * d2 / 2.0;
@@ -68,9 +64,9 @@ namespace Application
 
         static public void Main()
         {
-            int N, d1=0, d2=0, alpha=0;
+            int N, d1 = 0, d2 = 0, alpha = 0;
             N = int.Parse(Console.ReadLine());
-            switch(N)
+            switch (N)
             {
                 case 1:
                     d1 = int.Parse(Console.ReadLine());
@@ -96,7 +92,7 @@ namespace Application
                     p = new Parallelogram(d1, d2, alpha);
                     break;
                 case 2:
-                    p = new Diamond(d1,d2);
+                    p = new Diamond(d1, d2);
                     break;
                 case 3:
                     p = new Square(d1);

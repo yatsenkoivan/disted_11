@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Application
 {
-
     class Triangle
     {
         protected int a;
@@ -27,7 +23,7 @@ namespace Application
         {
             return a + b + c;
         }
-        public virtual double Radius()
+        public virtual double OuterCircleRadius()
         {
             double R = a * b * c / (4 * Area());
             return R;
@@ -58,7 +54,7 @@ namespace Application
             return S;
         }
 
-        public override double Radius()
+        public override double OuterCircleRadius()
         {
             double R = a * Math.Sqrt(3) / 3.0;
             return R;
@@ -71,6 +67,7 @@ namespace Application
 
         static public void Main()
         {
+
             int N, a = 0, b = 0, c = 0;
             N = int.Parse(Console.ReadLine());
             switch (N)
@@ -110,7 +107,7 @@ namespace Application
 
             Console.WriteLine($"S = {t.Area()}");
             Console.WriteLine($"P = {t.Perimeter()}");
-            Console.WriteLine($"R = {t.Radius()}");
+            Console.WriteLine($"R = {t.OuterCircleRadius()}");
         }
     }
 }
