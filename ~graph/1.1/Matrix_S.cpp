@@ -23,7 +23,7 @@ vector<vector<bool>> Input()
     return A;
 }
 
-deque<pair<int,int>> Count(const vector<vector<bool>>& A)
+deque<pair<int,int>> CreateEdges(const vector<vector<bool>>& A)
 {
     int n = A.size();
     deque<pair<int,int>> edges;
@@ -53,6 +53,6 @@ void Output(deque<pair<int,int>>& D)
 int main()
 {
     vector<vector<bool>> M = Input();
-    deque<pair<int,int>> edges = Count(M);
+    deque<pair<int,int>> edges = CreateEdges(M);
     Output(edges);
 }
