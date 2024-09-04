@@ -81,7 +81,13 @@ bool Alg2()
     S = unordered_set<int>(A.size());
     S.insert(0);
     Q.push(0);
-    return Alg2_base();
+    
+    bool res = Alg2_base();
+
+    Q.pop();
+    S.clear();
+
+    return res;
 }
 
 int main()

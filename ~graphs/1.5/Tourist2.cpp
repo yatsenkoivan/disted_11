@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <unordered_set>
 using namespace std;
 
 class Solution
@@ -9,18 +10,20 @@ class Solution
         int n, k;
         vector<vector<bool>> A;
 
+        unordered_set<int> visited;
         deque<int> Q;
 
-        void Clear(int a, int b)
+        void Visit(int x)
         {
-            A[a][b] = 0;
-            A[b][a] = 0;
+            Q.push_back(x);
+            visited.insert(x);
         }
 
-        void Restore(int a, int b)
+        void UnvisitLast()
         {
-            A[a][b] = 1;
-            A[b][a] = 1;
+            int x = Q.back();
+            Q.pop_back();
+            visited.erase(x);
         }
 
         void OutputPath()
@@ -34,7 +37,7 @@ class Solution
 
         void Deepen()
         {
-            if (Q.size() == k+1)
+            if (Q.size() == k)
             {
                 OutputPath();
                 return;
@@ -43,15 +46,11 @@ class Solution
 
             for (int i=0; i<n; i++)
             {
-                if (A[current][i])
+                if (A[current][i] && visited.find(i) == visited.end())
                 {
-                    Q.push_back(i);
-                    Clear(current, i);
-
+                    Visit(i);
                     Deepen();
-
-                    Restore(current, i);
-                    Q.pop_back();
+                    UnvisitLast();
                 }
             }
         }
@@ -59,6 +58,7 @@ class Solution
     public:
         Solution(int n, int k) : n{n}, k{k}
         {
+            visited = unordered_set<int>(k);
             A = vector<vector<bool>>(n, vector<bool>(n,0));
             for (int i=0; i<n; i++)
             {
@@ -73,9 +73,9 @@ class Solution
 
         void Start(int p)
         {
-            Q.push_back(p-1);
+            Visit(p-1);
             Deepen();
-            Q.pop_back();
+            UnvisitLast();
         }
 };
 
