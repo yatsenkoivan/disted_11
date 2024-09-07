@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <deque>
 #include <unordered_set>
 using namespace std;
 
@@ -11,24 +10,24 @@ class Solution
         vector<vector<bool>> A;
 
         unordered_set<int> visited;
-        deque<int> Q;
+        vector<int> path;
 
         void Visit(int x)
         {
-            Q.push_back(x);
+            path.push_back(x);
             visited.insert(x);
         }
 
         void UnvisitLast()
         {
-            int x = Q.back();
-            Q.pop_back();
+            int x = path.back();
+            path.pop_back();
             visited.erase(x);
         }
 
         void OutputPath()
         {
-            for (int i : Q)
+            for (int i : path)
             {
                 cout << i+1 << ' ';
             }
@@ -37,12 +36,12 @@ class Solution
 
         void Deepen()
         {
-            if (Q.size() == k)
+            if (path.size() == k)
             {
                 OutputPath();
                 return;
             }
-            int current = Q.back();
+            int current = path.back();
 
             for (int i=0; i<n; i++)
             {
@@ -58,8 +57,9 @@ class Solution
     public:
         Solution(int n, int k) : n{n}, k{k}
         {
-            visited = unordered_set<int>(k);
             A = vector<vector<bool>>(n, vector<bool>(n,0));
+            visited.reserve(k);
+            path.reserve(k);
             for (int i=0; i<n; i++)
             {
                 for (int j=0; j<n; j++)
@@ -84,6 +84,6 @@ int main()
     int n, k, p;
     cin >> n >> k >> p;
 
-    Solution A(n, k);
-    A.Start(p);
+    Solution S(n, k);
+    S.Start(p);
 }

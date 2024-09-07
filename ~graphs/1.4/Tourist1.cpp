@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <deque>
 using namespace std;
 
 class Solution
@@ -9,16 +8,16 @@ class Solution
         int n, k;
         vector<vector<bool>> A;
 
-        deque<int> Q;
+        vector<int> path;
 
         void Visit(int x)
         {
-            Q.push_back(x);
+            path.push_back(x);
         }
 
         void UnvisitLast()
         {
-            Q.pop_back();
+            path.pop_back();
         }
 
         void Clear(int a, int b)
@@ -35,7 +34,7 @@ class Solution
 
         void OutputPath()
         {
-            for (int i : Q)
+            for (int i : path)
             {
                 cout << i+1 << ' ';
             }
@@ -44,12 +43,12 @@ class Solution
 
         void Deepen()
         {
-            if (Q.size() == k+1)
+            if (path.size() == k+1)
             {
                 OutputPath();
                 return;
             }
-            int current = Q.back();
+            int current = path.back();
 
             for (int i=0; i<n; i++)
             {
@@ -70,6 +69,7 @@ class Solution
         Solution(int n, int k) : n{n}, k{k}
         {
             A = vector<vector<bool>>(n, vector<bool>(n,0));
+            path.reserve(k+1);
             for (int i=0; i<n; i++)
             {
                 for (int j=0; j<n; j++)
@@ -94,6 +94,6 @@ int main()
     int n, k, p;
     cin >> n >> k >> p;
 
-    Solution A(n, k);
-    A.Start(p);
+    Solution S(n, k);
+    S.Start(p);
 }

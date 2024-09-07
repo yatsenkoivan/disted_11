@@ -1,31 +1,30 @@
 #include <iostream>
 #include <vector>
-#include <deque>
 using namespace std;
 
-deque<pair<int,int>> Input()
+vector<pair<int,int>> Input()
 {
     int k;
     cin >> k;
 
-    deque<pair<int,int>> D;
+    vector<pair<int,int>> E(k);
 
     for (int i=0; i<k; i++)
     {
         int a, b;
         cin >> a >> b;
 
-        D.push_back({a,b});
+        E.push_back({a,b});
     }
 
-    return D;
+    return E;
 }
 
-vector<vector<bool>> CreateMatrix(int n, deque<pair<int,int>>& D)
+vector<vector<bool>> CreateMatrix(int n, vector<pair<int,int>>& E)
 {
     vector<vector<bool>> A(n, vector<bool>(n, 0));
 
-    for (pair<int,int>& p : D)
+    for (pair<int,int>& p : E)
     {
         int a = p.first - 1;
         int b = p.second - 1;
@@ -55,7 +54,7 @@ int main()
     int n;
     cin >> n;
 
-    deque<pair<int,int>> edges = Input();
+    vector<pair<int,int>> edges = Input();
     vector<vector<bool>> M = CreateMatrix(n, edges);
     Output(M);
 }

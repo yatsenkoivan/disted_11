@@ -50,7 +50,7 @@ class Solution
         Solution(int n) : n{n}
         {
             A = vector<vector<bool>>(n, vector<bool>(n, 0));
-            visited = unordered_set<int>(n);
+            visited.reserve(n);
             for (int i=0; i<n; i++)
             {
                 for (int j=0; j<n; j++)

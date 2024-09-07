@@ -26,7 +26,7 @@ vector<vector<bool>> Input()
 deque<pair<int,int>> CreateEdges(const vector<vector<bool>>& A)
 {
     int n = A.size();
-    deque<pair<int,int>> edges;
+    deque<pair<int,int>> E;
 
     for (int i=0; i<n; i++)
     {
@@ -34,17 +34,17 @@ deque<pair<int,int>> CreateEdges(const vector<vector<bool>>& A)
         {
             if (A[i][j])
             {
-                edges.push_back({i+1, j+1});
+                E.push_back({i+1, j+1});
             }
         }
     }
-    return edges;
+    return E;
 }
 
-void Output(deque<pair<int,int>>& D)
+void Output(deque<pair<int,int>>& E)
 {
-    cout << D.size() << endl;
-    for (pair<int,int>& i : D)
+    cout << E.size() << endl;
+    for (pair<int,int>& i : E)
     {
         cout << i.first << ' ' << i.second << endl;
     }
