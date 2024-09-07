@@ -14,7 +14,7 @@ vector<pair<int,int>> Input()
         int a, b;
         cin >> a >> b;
 
-        E.push_back({a,b});
+        E[i] = {a,b};
     }
 
     return E;
