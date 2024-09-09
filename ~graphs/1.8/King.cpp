@@ -24,8 +24,9 @@ struct Point
 class Solution
 {
 	private:
-		const int _EMPTY = -1;
-		const int _PAWN = 'P';
+		const int _UNREACHABLE = -1;
+		const int _UNREACHED = -2;
+		const int _ATTACKED = -3;
 
 		int m, p;
 		vector<vector<int>> board;
@@ -41,42 +42,39 @@ class Solution
 			return board[point.y][point.x];
 		}
 
+		void SetPawn(const Point& point)
+        {
+            Point points[] =
+            {
+                point,
+                Point(point.x-1, point.y-1),
+                Point(point.x+1, point.y-1)
+            };
+
+            for (int i=0; i<3; i++)
+            {
+                Point& current = points[i];
+                if (OutOfBound(current) == 0)
+                    SetValue(current, _ATTACKED);
+            }
+        }
+
 		bool OutOfBound(const Point& point)
 		{
 			return (point.x < 0 || point.x >= m ||
 					point.y < 0 || point.y >= m);
 		}
 
-		bool IsPawn(const Point& point)
-		{
-			return GetValue(point) == _PAWN;
-		}
-
-		bool IsAttacked(const Point& point)
-		{
-			bool isAttacked = 0;
-
-			Point p1(point.x-1, point.y+1);
-			Point p2(point.x+1, point.y+1);
-
-			if (OutOfBound(p1) == 0 && IsPawn(p1)) isAttacked = 1;
-			if (OutOfBound(p2) == 0 && IsPawn(p2)) isAttacked = 1;
-
-			return isAttacked;
-		}
-
 		bool IsEmpty(const Point& point)
 		{
-			return GetValue(point) == _EMPTY;
+			return GetValue(point) == _UNREACHED;
 		}
 
 		bool IsPossibleToMove(const Point& point)
 		{
 			if (OutOfBound(point))
 				return 0;
-			if (IsEmpty(point)==0)
-				return 0;
-			if (IsAttacked(point))
+			if (IsEmpty(point) == 0)
 				return 0;
 			
 			return 1;
@@ -115,12 +113,12 @@ class Solution
 
 		Solution(int m, int p) : m{m}, p{p}
 		{
-			board = vector<vector<int>>(m, vector<int>(m, _EMPTY));
+			board = vector<vector<int>>(m, vector<int>(m, _UNREACHED));
 			for (int i=0; i<p; i++)
 			{
 				Point point;
 				cin >> point;
-				SetValue(point, _PAWN);
+				SetPawn(point);
 			}
 			cin >> start >> end;
 			SetValue(start, 0);
@@ -131,7 +129,7 @@ class Solution
 			queue<Point> Q;
 			Q.push(start);
 
-			while (Q.empty()==0 && GetValue(end) == _EMPTY)
+			while (Q.empty() == 0 && IsEmpty(end))
 			{
 				Point& current = Q.front();
 				Broaden(current, Q);
@@ -141,7 +139,10 @@ class Solution
 
 		int GetShortestPath()
 		{
-			return GetValue(end);
+			int value = GetValue(end);
+			if (value >= 0)
+				return value;
+			return _UNREACHABLE;
 		}
 };
 
