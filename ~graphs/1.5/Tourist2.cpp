@@ -6,7 +6,7 @@ using namespace std;
 class Solution
 {
     private:
-        int n, k;
+        int n, k, p;
         vector<vector<bool>> A;
 
         unordered_set<int> visited;
@@ -55,7 +55,7 @@ class Solution
         }
 
     public:
-        Solution(int n, int k) : n{n}, k{k}
+        Solution(int n, int k, int p) : n{n}, k{k}, p{p}
         {
             A = vector<vector<bool>>(n, vector<bool>(n,0));
             visited.reserve(k);
@@ -71,7 +71,7 @@ class Solution
             }
         }
 
-        void Start(int p)
+        void Start()
         {
             Visit(p-1);
             Deepen();
@@ -84,6 +84,6 @@ int main()
     int n, k, p;
     cin >> n >> k >> p;
 
-    Solution S(n, k);
-    S.Start(p);
+    Solution S(n, k, p);
+    S.Start();
 }
