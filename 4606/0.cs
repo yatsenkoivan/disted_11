@@ -10,7 +10,7 @@ namespace Application
         {
             for (int i=0; i<arr.Length; i++)
             {
-                if (arr[i] >= 2 && arr[i] <= 17)
+                if (arr[i] > 2 && arr[i] < 17)
                 {
                     arr[i] *= arr[i];
                 }
